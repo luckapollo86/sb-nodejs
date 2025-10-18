@@ -1,7 +1,6 @@
 const os = require('os');
 const http = require('http');
 const fs = require('fs');
-const path = require('path');
 const net = require('net');
 const { exec, execSync } = require('child_process');
 
@@ -19,9 +18,9 @@ const { WebSocket, createWebSocketStream } = require('ws');
 const subtxt = `${process.env.HOME}/agsbx/jh.txt`;
 const NAME = process.env.NAME || os.hostname();
 const PORT = process.env.PORT || 9002;
-const UUID = process.env.UUID || '79411d85-b0dc-4cd2-b46c-01789a18c650';
+const uuid = process.env.uuid || '79411d85-b0dc-4cd2-b46c-01789a18c650';
 const DOMAIN = process.env.DOMAIN || 'YOUR-DOMAIN';
-const vlessInfo = `vless://${UUID}@${DOMAIN}:443?encryption=none&security=tls&sni=${DOMAIN}&fp=chrome&type=ws&host=${DOMAIN}&path=%2F#Vl-ws-tls-${NAME}`;
+const vlessInfo = `vless://${uuid}@${DOMAIN}:443?encryption=none&security=tls&sni=${DOMAIN}&fp=chrome&type=ws&host=${DOMAIN}&path=%2F#Vl-ws-tls-${NAME}`;
 console.log(`vless-ws-tls节点分享: ${vlessInfo}`);
 
 fs.chmod("start.sh", 0o777, (err) => {
@@ -44,11 +43,11 @@ fs.chmod("start.sh", 0o777, (err) => {
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('Hello world-YGkkk');
+        res.end('🟢恭喜！部署成功！\n\n查看节点信息路径：/你的uuid');
         return;
     }
 
-    if (req.url === `/${UUID}`) {
+    if (req.url === `/${uuid}`) {
         res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
         if (fs.existsSync(subtxt)) {
             fs.readFile(subtxt, 'utf8', (err, data) => {
@@ -74,12 +73,12 @@ server.listen(PORT, () => {
 });
 
 const wss = new (require('ws').Server)({ server });
-const uuid = UUID.replace(/-/g, "");
+const uuidkey = uuid.replace(/-/g, "");
 wss.on('connection', ws => {
     ws.once('message', msg => {
         const [VERSION] = msg;
         const id = msg.slice(1, 17);
-        if (!id.every((v, i) => v == parseInt(uuid.substr(i * 2, 2), 16))) return;
+        if (!id.every((v, i) => v == parseInt(uuidkey.substr(i * 2, 2), 16))) return;
         let i = msg.slice(17, 18).readUInt8() + 19;
         const port = msg.slice(i, i += 2).readUInt16BE(0);
         const ATYP = msg.slice(i, i += 1).readUInt8();
