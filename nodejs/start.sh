@@ -141,7 +141,7 @@ cat > "$HOME/agsbx/xr.json" <<EOF
   "inbounds": [
 EOF
 insuuid
-if [ -n "$xhp" ] || [ -n "$vlp" ]; then
+if [ -n "$xhpt" ] || [ -n "$vlpt" ]; then
 if [ -z "$ym_vl_re" ]; then
 ym_vl_re=apple.com
 fi
@@ -160,7 +160,7 @@ private_key_x=$(cat "$HOME/agsbx/xrk/private_key")
 public_key_x=$(cat "$HOME/agsbx/xrk/public_key")
 short_id_x=$(cat "$HOME/agsbx/xrk/short_id")
 fi
-if [ -n "$xhp" ] || [ -n "$vxp" ]; then
+if [ -n "$xhpt" ] || [ -n "$vxpt" ]; then
 if [ ! -e "$HOME/agsbx/xrk/dekey" ]; then
 vlkey=$("$HOME/agsbx/xray" vlessenc)
 dekey=$(echo "$vlkey" | grep '"decryption":' | sed -n '2p' | cut -d' ' -f2- | tr -d '"')
@@ -172,8 +172,7 @@ dekey=$(cat "$HOME/agsbx/xrk/dekey")
 enkey=$(cat "$HOME/agsbx/xrk/enkey")
 fi
 
-if [ -n "$xhp" ]; then
-xhp=xhpt
+if [ -n "$xhpt" ]; then
 if [ -z "$port_xh" ] && [ ! -e "$HOME/agsbx/port_xh" ]; then
 port_xh=$(shuf -i 10000-65535 -n 1)
 echo "$port_xh" > "$HOME/agsbx/port_xh"
@@ -222,11 +221,8 @@ cat >> "$HOME/agsbx/xr.json" <<EOF
       }
     },
 EOF
-else
-xhp=xhptargo
 fi
-if [ -n "$vxp" ]; then
-vxp=vxpt
+if [ -n "$vxpt" ]; then
 if [ -z "$port_vx" ] && [ ! -e "$HOME/agsbx/port_vx" ]; then
 port_vx=$(shuf -i 10000-65535 -n 1)
 echo "$port_vx" > "$HOME/agsbx/port_vx"
@@ -265,11 +261,8 @@ cat >> "$HOME/agsbx/xr.json" <<EOF
       }
     },
 EOF
-else
-vxp=vxptargo
 fi
-if [ -n "$vlp" ]; then
-vlp=vlpt
+if [ -n "$vlpt" ]; then
 if [ -z "$port_vl_re" ] && [ ! -e "$HOME/agsbx/port_vl_re" ]; then
 port_vl_re=$(shuf -i 10000-65535 -n 1)
 echo "$port_vl_re" > "$HOME/agsbx/port_vl_re"
@@ -313,8 +306,6 @@ cat >> "$HOME/agsbx/xr.json" <<EOF
       }
     },  
 EOF
-else
-vlp=vlptargo
 fi
 }
 
@@ -343,8 +334,7 @@ if [ ! -f "$HOME/agsbx/private.key" ]; then
 url="https://github.com/yonggekkk/argosbx/releases/download/argosbx/private.key"; out="$HOME/agsbx/private.key"; (command -v curl>/dev/null 2>&1 && curl -Ls -o "$out" --retry 2 "$url") || (command -v wget>/dev/null 2>&1 && timeout 3 wget -q -O "$out" --tries=2 "$url")
 url="https://github.com/yonggekkk/argosbx/releases/download/argosbx/cert.pem"; out="$HOME/agsbx/cert.pem"; (command -v curl>/dev/null 2>&1 && curl -Ls -o "$out" --retry 2 "$url") || (command -v wget>/dev/null 2>&1 && timeout 3 wget -q -O "$out" --tries=2 "$url")
 fi
-if [ -n "$hyp" ]; then
-hyp=hypt
+if [ -n "$hypt" ]; then
 if [ -z "$port_hy2" ] && [ ! -e "$HOME/agsbx/port_hy2" ]; then
 port_hy2=$(shuf -i 10000-65535 -n 1)
 echo "$port_hy2" > "$HOME/agsbx/port_hy2"
@@ -375,11 +365,8 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
         }
     },
 EOF
-else
-hyp=hyptargo
 fi
-if [ -n "$tup" ]; then
-tup=tupt
+if [ -n "$tupt" ]; then
 if [ -z "$port_tu" ] && [ ! -e "$HOME/agsbx/port_tu" ]; then
 port_tu=$(shuf -i 10000-65535 -n 1)
 echo "$port_tu" > "$HOME/agsbx/port_tu"
@@ -411,11 +398,8 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
             }
         },
 EOF
-else
-tup=tuptargo
 fi
-if [ -n "$anp" ]; then
-anp=anpt
+if [ -n "$anpt" ]; then
 if [ -z "$port_an" ] && [ ! -e "$HOME/agsbx/port_an" ]; then
 port_an=$(shuf -i 10000-65535 -n 1)
 echo "$port_an" > "$HOME/agsbx/port_an"
@@ -443,11 +427,8 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
             }
         },
 EOF
-else
-anp=anptargo
 fi
-if [ -n "$arp" ]; then
-arp=arpt
+if [ -n "$arpt" ]; then
 if [ -z "$ym_vl_re" ]; then
 ym_vl_re=apple.com
 fi
@@ -501,11 +482,8 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
           }
         },
 EOF
-else
-arp=arptargo
 fi
-if [ -n "$ssp" ]; then
-ssp=sspt
+if [ -n "$sspt" ]; then
 if [ ! -e "$HOME/agsbx/sskey" ]; then
 sskey=$("$HOME/agsbx/sing-box" generate rand 16 --base64)
 echo "$sskey" > "$HOME/agsbx/sskey"
@@ -529,14 +507,11 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
             "password": "$sskey"
     },  
 EOF
-else
-ssp=ssptargo
 fi
 }
 
 xrsbvm(){
-if [ -n "$vmp" ]; then
-vmp=vmpt
+if [ -n "$vmpt" ]; then
 if [ -z "$port_vm_ws" ] && [ ! -e "$HOME/agsbx/port_vm_ws" ]; then
 port_vm_ws=$(shuf -i 10000-65535 -n 1)
 echo "$port_vm_ws" > "$HOME/agsbx/port_vm_ws"
@@ -599,14 +574,11 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
     },
 EOF
 fi
-else
-vmp=vmptargo
 fi
 }
 
 xrsbso(){
-if [ -n "$sop" ]; then
-sop=sopt
+if [ -n "$sopt" ]; then
 if [ -z "$port_so" ] && [ ! -e "$HOME/agsbx/port_so" ]; then
 port_so=$(shuf -i 10000-65535 -n 1)
 echo "$port_so" > "$HOME/agsbx/port_so"
@@ -655,8 +627,6 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
     },
 EOF
 fi
-else
-sop=soptargo
 fi
 }
 
@@ -866,20 +836,18 @@ fi
 fi
 }
 ins(){
-if [ "$hyp" != yes ] && [ "$tup" != yes ] && [ "$anp" != yes ] && [ "$arp" != yes ] && [ "$ssp" != yes ]; then
+if [ -z "$hypt" ] && [ -z "$tupt" ] && [ -z "$anpt" ] && [ -z "$arpt" ] && [ -z "$sspt" ]; then
 installxray
 xrsbvm
 xrsbso
 warpsx
 xrsbout
-hyp="hyptargo"; tup="tuptargo"; anp="anptargo"; arp="arptargo"; ssp="ssptargo"
-elif [ "$xhp" != yes ] && [ "$vlp" != yes ] && [ "$vxp" != yes ]; then
+elif [ -z "$xhpt" ] && [ -z "$vlpt" ] && [ -z "$vxpt" ]; then
 installsb
 xrsbvm
 xrsbso
 warpsx
 xrsbout
-xhp="xhptargo"; vlp="vlptargo"; vxp="vxptargo"
 else
 installsb
 installxray
@@ -954,48 +922,8 @@ else
 echo "Argo$argoname隧道申请失败，请稍后再试"
 fi
 fi
-echo
+
 if find /proc/*/exe -type l 2>/dev/null | grep -E '/proc/[0-9]+/exe' | xargs -r readlink 2>/dev/null | grep -Eq 'agsbx/(s|x)' || pgrep -f 'agsbx/(s|x)' >/dev/null 2>&1 ; then
-[ -f ~/.bashrc ] || touch ~/.bashrc
-sed -i '/agsbx/d' ~/.bashrc
-SCRIPT_PATH="$HOME/bin/agsbx"
-mkdir -p "$HOME/bin"
-(command -v curl >/dev/null 2>&1 && curl -sL "$agsbxurl" -o "$SCRIPT_PATH") || (command -v wget >/dev/null 2>&1 && wget -qO "$SCRIPT_PATH" "$agsbxurl")
-chmod +x "$SCRIPT_PATH"
-if ! pidof systemd >/dev/null 2>&1 && ! command -v rc-service >/dev/null 2>&1; then
-echo "if ! find /proc/*/exe -type l 2>/dev/null | grep -E '/proc/[0-9]+/exe' | xargs -r readlink 2>/dev/null | grep -Eq 'agsbx/(s|x)' && ! pgrep -f 'agsbx/(s|x)' >/dev/null 2>&1; then echo '检测到系统可能中断过，或者变量格式错误？建议在SSH对话框输入 reboot 重启下服务器。现在自动执行Argosbx脚本的节点恢复操作，请稍等……'; sleep 6; export cdnym=\"${cdnym}\" name=\"${name}\" ippz=\"${ippz}\" argo=\"${argo}\" uuid=\"${uuid}\" $wap=\"${warp}\" $xhp=\"${port_xh}\" $vxp=\"${port_vx}\" $ssp=\"${port_ss}\" $sop=\"${port_so}\" $anp=\"${port_an}\" $arp=\"${port_ar}\" $vlp=\"${port_vl_re}\" $vmp=\"${port_vm_ws}\" $hyp=\"${port_hy2}\" $tup=\"${port_tu}\" reym=\"${ym_vl_re}\" agn=\"${ARGO_DOMAIN}\" agk=\"${ARGO_AUTH}\"; bash "$HOME/bin/agsbx"; fi" >> ~/.bashrc
-fi
-sed -i '/export PATH="\$HOME\/bin:\$PATH"/d' ~/.bashrc
-echo 'export PATH="$HOME/bin:$PATH"' >> "$HOME/.bashrc"
-grep -qxF 'source ~/.bashrc' ~/.bash_profile 2>/dev/null || echo 'source ~/.bashrc' >> ~/.bash_profile
-. ~/.bashrc 2>/dev/null
-crontab -l > /tmp/crontab.tmp 2>/dev/null
-if ! pidof systemd >/dev/null 2>&1 && ! command -v rc-service >/dev/null 2>&1; then
-sed -i '/agsbx\/sing-box/d' /tmp/crontab.tmp
-sed -i '/agsbx\/xray/d' /tmp/crontab.tmp
-if find /proc/*/exe -type l 2>/dev/null | grep -E '/proc/[0-9]+/exe' | xargs -r readlink 2>/dev/null | grep -q 'agsbx/s' || pgrep -f 'agsbx/s' >/dev/null 2>&1 ; then
-echo '@reboot /bin/sh -c "nohup $HOME/agsbx/sing-box run -c $HOME/agsbx/sb.json >/dev/null 2>&1 &"' >> /tmp/crontab.tmp
-fi
-if find /proc/*/exe -type l 2>/dev/null | grep -E '/proc/[0-9]+/exe' | xargs -r readlink 2>/dev/null | grep -q 'agsbx/x' || pgrep -f 'agsbx/x' >/dev/null 2>&1 ; then
-echo '@reboot /bin/sh -c "nohup $HOME/agsbx/xray run -c $HOME/agsbx/xr.json >/dev/null 2>&1 &"' >> /tmp/crontab.tmp
-fi
-fi
-sed -i '/agsbx\/cloudflared/d' /tmp/crontab.tmp
-if [ -n "$argo" ] && [ -n "$vmag" ]; then
-if [ -n "${ARGO_DOMAIN}" ] && [ -n "${ARGO_AUTH}" ]; then
-if ! pidof systemd >/dev/null 2>&1 && ! command -v rc-service >/dev/null 2>&1; then
-echo '@reboot /bin/sh -c "nohup $HOME/agsbx/cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token $(cat $HOME/agsbx/sbargotoken.log 2>/dev/null) >/dev/null 2>&1 &"' >> /tmp/crontab.tmp
-fi
-else
-if [ -e "$HOME/agsbx/xray" ]; then
-echo '@reboot /bin/sh -c "nohup $HOME/agsbx/cloudflared tunnel --url http://localhost:$(grep -A2 vmess-xr $HOME/agsbx/xr.json | tail -1 | tr -cd 0-9) --edge-ip-version auto --no-autoupdate --protocol http2 > $HOME/agsbx/argo.log 2>&1 &"' >> /tmp/crontab.tmp
-else
-echo '@reboot /bin/sh -c "nohup $HOME/agsbx/cloudflared tunnel --url http://localhost:$(grep -A2 vmess-sb $HOME/agsbx/sb.json | tail -1 | tr -cd 0-9) --edge-ip-version auto --no-autoupdate --protocol http2 > $HOME/agsbx/argo.log 2>&1 &"' >> /tmp/crontab.tmp
-fi
-fi
-fi
-crontab /tmp/crontab.tmp >/dev/null 2>&1
-rm /tmp/crontab.tmp
 echo "Argosbx脚本进程启动成功，安装完毕" && sleep 2
 else
 echo "Argosbx脚本进程未启动，安装失败" && exit
@@ -1279,19 +1207,6 @@ rc-update del "$svc" default >/dev/null 2>&1
 done
 rm -rf /etc/init.d/{sing-box,xray,argo}
 fi
-
-for P in /proc/[0-9]*; do if [ -L "$P/exe" ]; then TARGET=$(readlink -f "$P/exe" 2>/dev/null); if echo "$TARGET" | grep -qE '/agsb/c|/agsb/s|/agsb/x'; then PID=$(basename "$P"); kill "$PID" 2>/dev/null && echo "Killed $PID ($TARGET)" || echo "Could not kill $PID ($TARGET)"; fi; fi; done
-kill -15 $(pgrep -f 'agsb/s' 2>/dev/null) $(pgrep -f 'agsb/c' 2>/dev/null) $(pgrep -f 'agsb/x' 2>/dev/null) >/dev/null 2>&1
-sed -i '/agsb/d' ~/.bashrc
-sed -i '/export PATH="\$HOME\/bin:\$PATH"/d' ~/.bashrc
-. ~/.bashrc 2>/dev/null
-crontab -l > /tmp/crontab.tmp 2>/dev/null
-sed -i '/agsb\/sing-box/d' /tmp/crontab.tmp
-sed -i '/agsb\/xray/d' /tmp/crontab.tmp
-sed -i '/agsb\/cloudflared/d' /tmp/crontab.tmp
-crontab /tmp/crontab.tmp >/dev/null 2>&1
-rm /tmp/crontab.tmp
-rm -rf  "$HOME/bin/agsb"
 }
 if [ "$1" = "del" ]; then
 cleandel
